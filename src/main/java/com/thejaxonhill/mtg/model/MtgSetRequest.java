@@ -1,7 +1,5 @@
 package com.thejaxonhill.mtg.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,11 +9,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Legality {
+public class MtgSetRequest {
 
-    private String format;
+    private String block;
 
-    private String legality;
+    private String name;
+
+    private Integer page;
+
+    private Integer pageSize;
 
 }

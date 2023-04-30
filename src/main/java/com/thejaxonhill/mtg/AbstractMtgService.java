@@ -38,7 +38,7 @@ abstract public class AbstractMtgService<T, REQ> implements MtgService<T, REQ> {
         try {
             return om.readValue(body, clazz);
         } catch (JsonProcessingException e) {
-            log.error("Unable to deserialize response body: {}", body);
+            log.error("{}", e.getMessage());
             throw new RuntimeException("Unable to deserialize response.");
         }
     }
@@ -67,7 +67,7 @@ abstract public class AbstractMtgService<T, REQ> implements MtgService<T, REQ> {
                 field.setAccessible(true);
                 Object obj = field.get(request);
                 if (obj != null)
-                    urlBuilder.addQueryParameter(field.getName(), obj.toString());
+                    urlBuilder.addEncodedQueryParameter(field.getName(), obj.toString());
             } catch (IllegalArgumentException | IllegalAccessException e) {
                 log.error("{}", e.getMessage());
                 throw new RuntimeException("Unable to build request url.");

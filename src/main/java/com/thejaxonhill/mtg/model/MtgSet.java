@@ -3,34 +3,47 @@ package com.thejaxonhill.mtg.model;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonDeserialize(as = MtgSetModel.class)
-public interface MtgSet {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    String getBlock();
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class MtgSet {
 
-    List<String> getBooster();
+    private String block;
 
-    String getCode();
+    private List<String> booster;
 
-    List<String> getExpansion();
+    private String code;
 
-    String getGathererCode();
+    private List<String> expansion;
 
-    String getMagicCardsInfoCode();
+    private String gathererCode;
 
-    Long getMkmId();
+    private String magicCardsInfoCode;
 
-    String getMkmName();
+    @JsonProperty("mkm_id")
+    private Long mkmId;
 
-    String getName();
+    @JsonProperty("mkm_name")
+    private String mkmName;
 
-    String getOldCode();
+    private String name;
 
-    String getOnlineOnly();
+    private String oldCode;
 
-    Date getReleaseDate();
+    private String onlineOnly;
 
-    String getType();
+    private Date releaseDate;
+
+    private String type;
+
 }

@@ -2,61 +2,70 @@ package com.thejaxonhill.mtg.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonDeserialize(as = MtgCardModel.class)
-public interface MtgCard {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    String getArtist();
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class MtgCard {
 
-    String getCmc();
+    private String artist;
 
-    List<String> getColors();
+    private String cmc;
 
-    List<String> getColorIdentity();
+    private List<String> colors;
 
-    List<ForeignName> getForeignNames();
+    private List<ColorIdentity> colorIdentity;
 
-    String getId();
+    private List<ForeignName> foreignNames;
 
-    String getImageUrl();
+    private String id;
 
-    String getLayout();
+    private String imageUrl;
 
-    List<Legality> getLegalities();
+    private String layout;
 
-    String getManaCost();
+    private List<Legality> legalities;
 
-    String getMultiverseid();
+    private String manaCost;
 
-    String getName();
+    private String multiverseid;
 
-    String getNumber();
+    private String name;
 
-    String getOriginalText();
+    private String number;
 
-    String getOriginalType();
+    private String originalText;
 
-    String getPower();
+    private String originalType;
 
-    List<String> getPrintings();
+    private String power;
 
-    String getRarity();
+    private List<String> printings;
 
-    String getSet();
+    private String rarity;
 
-    String getSetName();
+    private String set;
 
-    List<String> getSubtypes();
+    private String setName;
 
-    String getText();
+    private List<String> subtypes;
 
-    String getToughness();
+    private String text;
 
-    String getType();
+    private String toughness;
 
-    List<String> getTypes();
+    private String type;
 
-    List<String> getVariations();
+    private List<String> types;
+
+    private List<String> variations;
 
 }

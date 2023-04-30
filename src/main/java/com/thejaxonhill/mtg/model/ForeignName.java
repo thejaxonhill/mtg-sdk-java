@@ -1,22 +1,31 @@
 package com.thejaxonhill.mtg.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonDeserialize(as = ForeignNameModel.class)
-public interface ForeignName {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    String getFlavor();
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ForeignName {
 
-    String getImageUrl();
+    private String flavor;
 
-    String getLanguage();
+    private String imageUrl;
 
-    Long getMulitverseid();
+    private String language;
 
-    String getName();
+    private Long mulitverseid;
 
-    String getText();
+    private String name;
 
-    String getType();
+    private String text;
+
+    private String type;
 
 }

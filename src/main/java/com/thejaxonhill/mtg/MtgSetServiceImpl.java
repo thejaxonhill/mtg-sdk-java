@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thejaxonhill.mtg.MtgCardService.MtgCardsResponse;
+import com.thejaxonhill.mtg.MtgCardServiceImpl.MtgCardsResponse;
 import com.thejaxonhill.mtg.MtgSetService.MtgSetRequest;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgSet;

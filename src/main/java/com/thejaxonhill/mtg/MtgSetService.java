@@ -17,12 +17,12 @@ public interface MtgSetService extends MtgService<MtgSet, MtgSetService.MtgSetRe
 
     @Builder
     record MtgSetRequest(
-        String block,
-        String name,
-        int page,
-        int pageSize
-    ){}
-    
+            String block,
+            String name,
+            int page,
+            int pageSize) {
+    }
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     record MtgSetResponse(MtgSet set, String status) {
     }
@@ -30,5 +30,5 @@ public interface MtgSetService extends MtgService<MtgSet, MtgSetService.MtgSetRe
     @JsonIgnoreProperties(ignoreUnknown = true)
     record MtgSetsResponse(List<MtgSet> sets, String status) {
     }
-    
+
 }

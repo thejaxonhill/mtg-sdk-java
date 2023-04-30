@@ -3,12 +3,12 @@ package com.thejaxonhill.mtg;
 import java.util.List;
 import java.util.function.Consumer;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thejaxonhill.mtg.MtgCardService.MtgCardRequest;
 import com.thejaxonhill.mtg.model.MtgCard;
+import com.thejaxonhill.mtg.model.MtgCardRequest;
 
 import lombok.Builder;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 public class MtgCardServiceImpl extends AbstractMtgService<MtgCard, MtgCardRequest> implements MtgCardService {
@@ -33,6 +33,14 @@ public class MtgCardServiceImpl extends AbstractMtgService<MtgCard, MtgCardReque
     @Override
     protected List<MtgCard> deserializeAll(String body) {
         return deserialize(body, MtgCardsResponse.class).cards();
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record MtgCardResponse(MtgCard card, String status) {
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record MtgCardsResponse(List<MtgCard> cards, String status) {
     }
 
 }
