@@ -10,7 +10,7 @@ public enum ColorIdentity {
 
     private String color;
 
-    public String identity() {
+    public String color() {
         return this.color;
     }
 
