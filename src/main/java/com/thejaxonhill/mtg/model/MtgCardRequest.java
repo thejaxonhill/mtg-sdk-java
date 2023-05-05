@@ -1,5 +1,7 @@
 package com.thejaxonhill.mtg.model;
 
+import java.util.function.Consumer;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class MtgCardRequest {
+
+    public static class MtgCardRequestBuilder implements MtgBuilder<MtgCardRequestBuilder, MtgCardRequest> {
+    }
 
     private String artist;
 

@@ -14,7 +14,6 @@ import com.thejaxonhill.mtg.MtgCardService;
 import com.thejaxonhill.mtg.MtgCardServiceImpl;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgExpression;
-import com.thejaxonhill.mtg.model.MtgExpression.MtgExpressionBuilder;
 
 import okhttp3.OkHttpClient;
 
@@ -32,7 +31,7 @@ public class MtgCardServiceTest {
     @Test
     void testGetAll_withConsumer() {
         MtgExpression exp = MtgExpression.builder("u").and("w").build();
-        List<MtgCard> res = service.getAll(r -> r.colors("u"));
+        List<MtgCard> res = service.getAll(r -> r.colors(exp.getExpression()));
         assertFalse(res.isEmpty());
     }
 

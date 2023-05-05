@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Legality {
 
+    public static class LegalityBuilder implements MtgBuilder<LegalityBuilder, Legality> {
+    }
+
     private String format;
 
     private String legality;

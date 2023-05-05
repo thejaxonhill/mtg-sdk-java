@@ -18,6 +18,9 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MtgSet {
 
+    public static class MtgSetBuilder implements MtgBuilder<MtgSetBuilder, MtgSet> {
+    }
+
     private String block;
 
     private List<String> booster;
