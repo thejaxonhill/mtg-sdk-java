@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MtgCard {
 
-    public static class MtgCardBuilder implements MtgBuilder<MtgCardBuilder, MtgCard> {
+    public static class MtgCardBuilder implements MtgBuilder<MtgCardBuilder> {
     }
 
     private String artist;

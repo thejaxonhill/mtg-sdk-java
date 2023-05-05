@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MtgCardRequest {
 
-    public static class MtgCardRequestBuilder implements MtgBuilder<MtgCardRequestBuilder, MtgCardRequest> {
+    public static class MtgCardRequestBuilder implements MtgBuilder<MtgCardRequestBuilder> {
     }
 
     private String artist;

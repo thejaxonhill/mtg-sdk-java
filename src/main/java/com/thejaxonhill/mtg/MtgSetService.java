@@ -3,32 +3,18 @@ package com.thejaxonhill.mtg;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgSet;
+import com.thejaxonhill.mtg.model.MtgSetRequest;
+import com.thejaxonhill.mtg.model.MtgSetRequest.MtgSetRequestBuilder;
 
-import lombok.Builder;
-
-public interface MtgSetService extends MtgService<MtgSet, MtgSetService.MtgSetRequest> {
-
-    List<MtgSet> getAll(Consumer<MtgSetRequest.MtgSetRequestBuilder> consumer);
+public interface MtgSetService extends MtgService<MtgSet, MtgSetRequest, MtgSetRequestBuilder> {
 
     List<MtgCard> generateBooster(String code);
 
-    @Builder
-    record MtgSetRequest(
-            String block,
-            String name,
-            int page,
-            int pageSize) {
+    @Override
+    default List<MtgSet> getAll(Consumer<MtgSetRequestBuilder> consumer) {
+        return getAll(MtgSetRequest.builder().applyMutation(consumer).build());
     }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    record MtgSetResponse(MtgSet set, String status) {
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    record MtgSetsResponse(List<MtgSet> sets, String status) {
-    }
-
+   
 }

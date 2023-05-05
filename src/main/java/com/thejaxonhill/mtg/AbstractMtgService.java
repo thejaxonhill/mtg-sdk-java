@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thejaxonhill.mtg.model.MtgBuilder;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ import okhttp3.Response;
 
 @Slf4j
 @RequiredArgsConstructor
-abstract public class AbstractMtgService<T, REQ> implements MtgService<T, REQ> {
+abstract public class AbstractMtgService<T, REQ, B extends MtgBuilder<B>> implements MtgService<T, REQ, B> {
 
     private static final String HOST = "https://api.magicthegathering.io/v1/";
 

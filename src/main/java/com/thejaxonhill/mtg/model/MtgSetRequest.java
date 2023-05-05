@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MtgSetRequest {
 
-    public static class MtgSetRequestBuilder implements MtgBuilder<MtgSetRequestBuilder, MtgSetRequest> {
+    public static class MtgSetRequestBuilder implements MtgBuilder<MtgSetRequestBuilder> {
     }
 
     private String block;

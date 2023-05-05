@@ -9,24 +9,24 @@ public class MtgExpression {
     private final String expression;
 
     public static class MtgExpressionBuilder {
-        StringBuilder expressionBuilder;
+        StringBuilder sb;
 
         MtgExpressionBuilder(String value) {
-            this.expressionBuilder = new StringBuilder(value);
+            this.sb = new StringBuilder(value);
         }
 
         public MtgExpressionBuilder and(String value) {
-            this.expressionBuilder.append("|").append(value);
+            this.sb.append("|").append(value);
             return this;
         }
 
         public MtgExpressionBuilder or(String value) {
-            this.expressionBuilder.append(",").append(value);
+            this.sb.append(",").append(value);
             return this;
         }
 
         public MtgExpression build() {
-            return new MtgExpression(expressionBuilder.toString());
+            return new MtgExpression(sb.toString());
         }
     }
 

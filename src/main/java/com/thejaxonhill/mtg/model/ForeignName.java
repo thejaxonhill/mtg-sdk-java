@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ForeignName {
     
-    public static class ForeignNameBuilder implements MtgBuilder<ForeignNameBuilder, ForeignName> {
+    public static class ForeignNameBuilder implements MtgBuilder<ForeignNameBuilder> {
     }
 
     private String flavor;
