@@ -1,7 +1,5 @@
 package com.thejaxonhill.mtg.model;
 
-import java.util.function.Consumer;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

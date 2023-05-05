@@ -2,7 +2,6 @@ package com.thejaxonhill.mtg;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,13 +21,6 @@ public class MtgSetServiceImpl extends AbstractMtgService<MtgSet, MtgSetRequest,
     @Builder
     public MtgSetServiceImpl(OkHttpClient client, ObjectMapper om) {
         super("sets", client, om);
-    }
-
-    @Override
-    public List<MtgSet> getAll(Consumer<MtgSetRequest.MtgSetRequestBuilder> consumer) {
-        MtgSetRequest.MtgSetRequestBuilder builder = MtgSetRequest.builder();
-        consumer.accept(builder);
-        return getAll(builder.build());
     }
 
     @Override
