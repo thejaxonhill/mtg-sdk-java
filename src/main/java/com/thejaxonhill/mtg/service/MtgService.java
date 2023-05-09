@@ -9,7 +9,7 @@ import com.thejaxonhill.mtg.model.MtgBuilder;
 public interface MtgService<T, REQ, B extends MtgBuilder<B>> {
 
     /**
-     * Function to fetch a specific object with a known id.
+     * Method to fetch a specific object with a known id.
      * If the card exists it will be present, or else the 
      * optional will be empty.
      *
@@ -19,7 +19,7 @@ public interface MtgService<T, REQ, B extends MtgBuilder<B>> {
     Optional<T> get(String id);
 
     /**
-     * Function to fetch a list objects based on the given request 
+     * Fetches a list objects based on the given request 
      * object. Any non-null value in the request will be added to 
      * the query parameters sent to the Magic the  Gathering API 
      * server.
@@ -30,7 +30,7 @@ public interface MtgService<T, REQ, B extends MtgBuilder<B>> {
     List<T> getAll(REQ request);
 
     /**
-     * Function to fetch a list objects based on the given mutator. 
+     * Fetches a list objects based on the given mutator. 
      * Any non-null value in the request will be added to 
      * the query parameters sent to the Magic the  Gathering API 
      * server.

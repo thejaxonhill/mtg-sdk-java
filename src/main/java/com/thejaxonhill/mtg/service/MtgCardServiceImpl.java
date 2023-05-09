@@ -1,6 +1,8 @@
 package com.thejaxonhill.mtg.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,13 +22,15 @@ public class MtgCardServiceImpl extends AbstractMtgService<MtgCard, MtgCardReque
     }
 
     @Override
-    protected MtgCard deserialize(String body) {
-        return deserialize(body, MtgCardResponse.class).card();
+    public Optional<MtgCard> get(String id) {
+        MtgCardResponse res = get(id, MtgCardResponse.class);
+        return Optional.ofNullable(res.card());
     }
 
     @Override
-    protected List<MtgCard> deserializeAll(String body) {
-        return deserialize(body, MtgCardsResponse.class).cards();
+    public List<MtgCard> getAll(MtgCardRequest request) {
+        MtgCardsResponse res = get(request, MtgCardsResponse.class);
+        return res == null ? new ArrayList<>() : res.cards();
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

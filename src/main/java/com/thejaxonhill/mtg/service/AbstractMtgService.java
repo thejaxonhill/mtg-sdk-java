@@ -2,9 +2,6 @@ package com.thejaxonhill.mtg.service;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,10 +28,6 @@ abstract public class AbstractMtgService<T, REQ, B extends MtgBuilder<B>> implem
 
     private final ObjectMapper om;
 
-    protected abstract T deserialize(String body);
-
-    protected abstract List<T> deserializeAll(String body);
-
     protected <R> R deserialize(String body, Class<R> clazz) {
         try {
             return om.readValue(body, clazz);
@@ -44,22 +37,12 @@ abstract public class AbstractMtgService<T, REQ, B extends MtgBuilder<B>> implem
         }
     }
 
-    public Optional<T> get(String id) {
-        HttpUrl url = buildUrl(b -> b.addPathSegment(id));
-        T obj = deserialize(send(url));
-        return Optional.ofNullable(obj);
+    protected <R> R get(String id, Class<R> clazz) {
+        return deserialize(send(b -> b.addPathSegment(id)), clazz);
     }
 
-    public List<T> getAll(REQ request) {
-        HttpUrl url = buildUrl(b -> setQueryParams(b, request));
-        List<T> objs = deserializeAll(send(url));
-        return objs != null ? objs : new ArrayList<>();
-    }
-
-    protected HttpUrl buildUrl(Consumer<HttpUrl.Builder> consumer) {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(HOST + basePath).newBuilder();
-        consumer.accept(urlBuilder);
-        return urlBuilder.build();
+    protected <R> R getAll(REQ request, Class<R> clazz) {
+        return deserialize(send(b -> setQueryParams(b, request)), clazz);
     }
 
     protected void setQueryParams(HttpUrl.Builder urlBuilder, REQ request) {
@@ -76,7 +59,8 @@ abstract public class AbstractMtgService<T, REQ, B extends MtgBuilder<B>> implem
         }
     }
 
-    protected String send(HttpUrl url) {
+    protected String send(Consumer<HttpUrl.Builder> consumer) {
+        HttpUrl url = buildUrl(consumer);
         Request req = new Request.Builder().url(url).build();
         Call call = client.newCall(req);
         try {
@@ -87,6 +71,12 @@ abstract public class AbstractMtgService<T, REQ, B extends MtgBuilder<B>> implem
             log.error("{}", e.getMessage());
             throw new RuntimeException("Unable to complete call to server.");
         }
+    }
+
+    private HttpUrl buildUrl(Consumer<HttpUrl.Builder> consumer) {
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(HOST + basePath).newBuilder();
+        consumer.accept(urlBuilder);
+        return urlBuilder.build();
     }
 
 }
