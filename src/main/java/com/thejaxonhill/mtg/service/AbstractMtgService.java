@@ -41,7 +41,7 @@ abstract public class AbstractMtgService<T, REQ, B extends MtgBuilder<B>> implem
         return deserialize(send(b -> b.addPathSegment(id)), clazz);
     }
 
-    protected <R> R getAll(REQ request, Class<R> clazz) {
+    protected <R> R get(REQ request, Class<R> clazz) {
         return deserialize(send(b -> setQueryParams(b, request)), clazz);
     }
 
