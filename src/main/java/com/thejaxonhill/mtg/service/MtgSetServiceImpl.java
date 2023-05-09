@@ -10,11 +10,9 @@ import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgSet;
 import com.thejaxonhill.mtg.model.MtgSetRequest;
 import com.thejaxonhill.mtg.model.MtgSetRequest.MtgSetRequestBuilder;
-import com.thejaxonhill.mtg.service.MtgCardServiceImpl.MtgCardResponse;
 import com.thejaxonhill.mtg.service.MtgCardServiceImpl.MtgCardsResponse;
 
 import lombok.Builder;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 public class MtgSetServiceImpl extends AbstractMtgService<MtgSet, MtgSetRequest, MtgSetRequestBuilder>
