@@ -1,4 +1,4 @@
-package com.thejaxonhill.mtg;
+package com.thejaxonhill.mtg.service;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

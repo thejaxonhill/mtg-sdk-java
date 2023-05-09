@@ -1,15 +1,15 @@
-package com.thejaxonhill.mtg;
+package com.thejaxonhill.mtg.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thejaxonhill.mtg.MtgCardServiceImpl.MtgCardsResponse;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgSet;
 import com.thejaxonhill.mtg.model.MtgSetRequest;
 import com.thejaxonhill.mtg.model.MtgSetRequest.MtgSetRequestBuilder;
+import com.thejaxonhill.mtg.service.MtgCardServiceImpl.MtgCardsResponse;
 
 import lombok.Builder;
 import okhttp3.HttpUrl;

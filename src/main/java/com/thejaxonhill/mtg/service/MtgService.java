@@ -1,4 +1,4 @@
-package com.thejaxonhill.mtg;
+package com.thejaxonhill.mtg.service;
 
 import java.util.List;
 import java.util.Optional;

@@ -10,10 +10,10 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thejaxonhill.mtg.MtgCardService;
-import com.thejaxonhill.mtg.MtgCardServiceImpl;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgExpression;
+import com.thejaxonhill.mtg.service.MtgCardService;
+import com.thejaxonhill.mtg.service.MtgCardServiceImpl;
 
 import okhttp3.OkHttpClient;
 
