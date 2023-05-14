@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 
 import com.thejaxonhill.mtg.shared.MtgConfig;
 import com.thejaxonhill.mtg.shared.MutableBuilder;
-import com.thejaxonhill.mtg.shared.SerializableHttpClient;
 import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl;
 import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl.SerializableHttpClientImplBuilder;
 
