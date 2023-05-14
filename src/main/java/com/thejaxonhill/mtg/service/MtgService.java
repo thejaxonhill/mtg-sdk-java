@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.thejaxonhill.mtg.shared.MutableBuilder;
+import com.thejaxonhill.mtg.shared.SerializableHttpClient;
+import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl;
 
 public interface MtgService<T, REQ, B extends MutableBuilder<B>> {
 

@@ -3,29 +3,19 @@ package com.thejaxonhill;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thejaxonhill.mtg.model.MtgCard;
-import com.thejaxonhill.mtg.model.MtgExpression;
 import com.thejaxonhill.mtg.service.MtgCardService;
 import com.thejaxonhill.mtg.service.MtgCardServiceImpl;
-
-import okhttp3.OkHttpClient;
 
 public class MtgCardServiceTest {
 
     MtgCardService service = MtgCardServiceImpl.builder()
-            .om(new ObjectMapper())
-            .client(new OkHttpClient.Builder()
-                    .callTimeout(Duration.ofMinutes(5))
-                    .connectTimeout(Duration.ofMinutes(5))
-                    .readTimeout(Duration.ofMinutes(5))
-                    .build())
+            .useDefault()
             .build();
 
     @Test

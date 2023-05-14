@@ -5,39 +5,47 @@ import java.util.List;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgSet;
 import com.thejaxonhill.mtg.model.MtgSetRequest;
-import com.thejaxonhill.mtg.model.MtgSetRequest.MtgSetRequestBuilder;
 import com.thejaxonhill.mtg.service.MtgCardServiceImpl.MtgCardsResponse;
+import com.thejaxonhill.mtg.shared.MtgConfig;
+import com.thejaxonhill.mtg.shared.SerializableHttpClient;
+import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl;
 
 import lombok.Builder;
-import okhttp3.OkHttpClient;
 
-public class MtgSetServiceImpl extends AbstractMtgService<MtgSet, MtgSetRequest, MtgSetRequestBuilder>
-        implements MtgSetService {
+@Builder
+public class MtgSetServiceImpl implements MtgSetService {
 
-    @Builder
-    public MtgSetServiceImpl(OkHttpClient client, ObjectMapper om) {
-        super("sets", client, om);
+    private static final String SETS_PATH = "sets";
+
+    private final SerializableHttpClient client;
+
+    public static class MtgSetServiceImplBuilder {
+        public MtgSetServiceImplBuilder useDefault() {
+            this.client = SerializableHttpClientImpl.builder()
+                    .useDefault(MtgConfig.BASE_URL)
+                    .build();
+            return this;
+        }
     }
 
     @Override
     public Optional<MtgSet> get(String id) {
-        MtgSetResponse res = get(id, MtgSetResponse.class);
+        MtgSetResponse res = client.send(url -> url.addPathSegments(SETS_PATH + "/" + id), MtgSetResponse.class);
         return Optional.ofNullable(res.set());
     }
 
     @Override
     public List<MtgSet> getAll(MtgSetRequest request) {
-        MtgSetsResponse res = get(request, MtgSetsResponse.class);
+        MtgSetsResponse res = client.send(url -> url.addPathSegment(SETS_PATH), request, MtgSetsResponse.class);
         return res == null ? new ArrayList<>() : res.sets();
     }
 
     @Override
     public List<MtgCard> generateBooster(String code) {
-        MtgCardsResponse res = deserialize(send(u -> u.addPathSegments(code + "/booster")), MtgCardsResponse.class);
+        MtgCardsResponse res = client.send(u -> u.addPathSegments("sets/" + code + "/booster"), MtgCardsResponse.class);
         return res == null ? new ArrayList<>() : res.cards();
     }
 

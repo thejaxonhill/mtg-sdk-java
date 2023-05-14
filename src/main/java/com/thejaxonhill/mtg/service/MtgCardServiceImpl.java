@@ -5,31 +5,41 @@ import java.util.List;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgCardRequest;
-import com.thejaxonhill.mtg.model.MtgCardRequest.MtgCardRequestBuilder;
+import com.thejaxonhill.mtg.shared.MtgConfig;
+import com.thejaxonhill.mtg.shared.SerializableHttpClient;
+import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl;
 
 import lombok.Builder;
-import okhttp3.OkHttpClient;
 
-public class MtgCardServiceImpl extends AbstractMtgService<MtgCard, MtgCardRequest, MtgCardRequestBuilder>
-        implements MtgCardService {
+@Builder
+public class MtgCardServiceImpl implements MtgCardService {
 
-    @Builder
-    public MtgCardServiceImpl(OkHttpClient client, ObjectMapper om) {
-        super("cards", client, om);
+    private static final String CARDS_PATH = "cards";
+    
+    private final SerializableHttpClient client;
+
+    public static class MtgCardServiceImplBuilder {
+        public MtgCardServiceImplBuilder useDefault() {
+            this.client = SerializableHttpClientImpl.builder()
+                    .useDefault(MtgConfig.BASE_URL)
+                    .build();
+            return this;
+        }
     }
 
     @Override
     public Optional<MtgCard> get(String id) {
-        MtgCardResponse res = get(id, MtgCardResponse.class);
+        MtgCardResponse res = client.send(url -> url.addPathSegments(CARDS_PATH + "/" + id),
+                MtgCardResponse.class);
         return Optional.ofNullable(res.card());
     }
 
     @Override
     public List<MtgCard> getAll(MtgCardRequest request) {
-        MtgCardsResponse res = get(request, MtgCardsResponse.class);
+        MtgCardsResponse res = client.send(url -> url.addPathSegment(CARDS_PATH), request,
+                MtgCardsResponse.class);
         return res == null ? new ArrayList<>() : res.cards();
     }
 
