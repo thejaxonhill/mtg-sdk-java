@@ -3,7 +3,6 @@ package com.thejaxonhill.mtg.shared;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.Duration;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,7 +26,7 @@ public class SerializableHttpClientImpl implements SerializableHttpClient {
 
     private final ObjectMapper om;
 
-    public static class SerializableHttpClientImplBuilder {
+    public static class SerializableHttpClientImplBuilder implements MutableBuilder<SerializableHttpClientImplBuilder> {
 
         public SerializableHttpClientImplBuilder useDefault(String host) {
             this.host = host;
@@ -43,37 +42,32 @@ public class SerializableHttpClientImpl implements SerializableHttpClient {
             this.om = new ObjectMapper();
             return this;
         }
+
     }
 
     public <R> R send(Consumer<HttpUrl.Builder> consumer, Object request, Class<R> clazz) {
-        consumer.andThen(url -> {
-            for (Field field : request.getClass().getDeclaredFields()) {
-                try {
-                    field.setAccessible(true);
-                    Object obj = field.get(request);
-                    if (obj != null)
-                        url.addEncodedQueryParameter(field.getName(), obj.toString());
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    log.error("{}", e.getMessage());
-                    throw new SerializableHttpClientException("Unable to attach request parameter.");
-                }
-            }
-        });
-
-        return send(consumer, clazz);
-    }
-    
-    public <R> R send(Consumer<HttpUrl.Builder> consumer, Class<R> clazz) {
-        HttpUrl url = acceptUrl(consumer);
+        HttpUrl url = setParams(acceptUrl(consumer), request).build();
         return send(url, clazz);
     }
 
-    private HttpUrl acceptUrl(Consumer<HttpUrl.Builder> consumer) {
-        HttpUrl.Builder urlBuilder = host != null
-                ? HttpUrl.parse(host).newBuilder()
-                : new HttpUrl.Builder();
-        consumer.accept(urlBuilder);
-        return urlBuilder.build();
+    private HttpUrl.Builder setParams(HttpUrl.Builder builder, Object request) {
+        for (Field field : request.getClass().getDeclaredFields()) {
+            try {
+                field.setAccessible(true);
+                Object obj = field.get(request);
+                if (obj != null)
+                    builder.addEncodedQueryParameter(field.getName(), obj.toString());
+            } catch (IllegalArgumentException | IllegalAccessException e) {
+                log.error("{}", e.getMessage());
+                throw new SerializableHttpClientException("Unable to attach request parameter.");
+            }
+        }
+        return builder;
+    }
+
+    public <R> R send(Consumer<HttpUrl.Builder> consumer, Class<R> clazz) {
+        HttpUrl url = acceptUrl(consumer).build();
+        return send(url, clazz);
     }
 
     public <R> R send(HttpUrl url, Class<R> clazz) {
@@ -87,6 +81,14 @@ public class SerializableHttpClientImpl implements SerializableHttpClient {
             log.error("{}", e.getMessage());
             throw new SerializableHttpClientException("Unable to complete call to server.");
         }
+    }
+
+    private HttpUrl.Builder acceptUrl(Consumer<HttpUrl.Builder> consumer) {
+        HttpUrl.Builder urlBuilder = host != null
+                ? HttpUrl.parse(host).newBuilder()
+                : new HttpUrl.Builder();
+        consumer.accept(urlBuilder);
+        return urlBuilder;
     }
 
     private <R> R deserialize(String body, Class<R> clazz) {

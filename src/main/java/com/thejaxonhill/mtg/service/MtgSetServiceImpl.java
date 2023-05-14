@@ -9,7 +9,6 @@ import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgSet;
 import com.thejaxonhill.mtg.model.MtgSetRequest;
 import com.thejaxonhill.mtg.service.MtgCardServiceImpl.MtgCardsResponse;
-import com.thejaxonhill.mtg.shared.MtgConfig;
 import com.thejaxonhill.mtg.shared.SerializableHttpClient;
 import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl;
 
@@ -22,11 +21,9 @@ public class MtgSetServiceImpl implements MtgSetService {
 
     private final SerializableHttpClient client;
 
-    public static class MtgSetServiceImplBuilder {
-        public MtgSetServiceImplBuilder useDefault() {
-            this.client = SerializableHttpClientImpl.builder()
-                    .useDefault(MtgConfig.BASE_URL)
-                    .build();
+    public static class MtgSetServiceImplBuilder implements MtgServiceBuilder<MtgSetServiceImplBuilder> {
+        public MtgSetServiceImplBuilder client(SerializableHttpClientImpl client) {
+            this.client = client;
             return this;
         }
     }

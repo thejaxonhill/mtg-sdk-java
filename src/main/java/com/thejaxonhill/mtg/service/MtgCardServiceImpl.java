@@ -7,7 +7,6 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgCardRequest;
-import com.thejaxonhill.mtg.shared.MtgConfig;
 import com.thejaxonhill.mtg.shared.SerializableHttpClient;
 import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl;
 
@@ -17,14 +16,12 @@ import lombok.Builder;
 public class MtgCardServiceImpl implements MtgCardService {
 
     private static final String CARDS_PATH = "cards";
-    
+
     private final SerializableHttpClient client;
 
-    public static class MtgCardServiceImplBuilder {
-        public MtgCardServiceImplBuilder useDefault() {
-            this.client = SerializableHttpClientImpl.builder()
-                    .useDefault(MtgConfig.BASE_URL)
-                    .build();
+    public static class MtgCardServiceImplBuilder implements MtgServiceBuilder<MtgCardServiceImplBuilder> {
+        public MtgCardServiceImplBuilder client(SerializableHttpClientImpl client) {
+            this.client = client;
             return this;
         }
     }

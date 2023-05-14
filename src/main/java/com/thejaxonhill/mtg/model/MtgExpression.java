@@ -28,17 +28,17 @@ public class MtgExpression {
         }
 
         public MtgExpressionBuilder and(String value) {
-            this.sb.append("|").append(value);
-            return this;
-        }
-
-        public MtgExpressionBuilder or(String value) {
             this.sb.append(",").append(value);
             return this;
         }
 
+        public MtgExpressionBuilder or(String value) {
+            this.sb.append("|").append(value);
+            return this;
+        }
+
         public MtgExpression build() {
-            if(!isValid())
+            if (!isValid())
                 throw new MtgExpressionException();
             return new MtgExpression(sb.insert(0, with).toString());
         }
