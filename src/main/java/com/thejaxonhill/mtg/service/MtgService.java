@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import com.thejaxonhill.mtg.model.MtgBuilder;
+import com.thejaxonhill.mtg.shared.MutableBuilder;
 
-public interface MtgService<T, REQ, B extends MtgBuilder<B>> {
+public interface MtgService<T, REQ, B extends MutableBuilder<B>> {
 
     /**
      * Method to fetch a specific object with a known id.

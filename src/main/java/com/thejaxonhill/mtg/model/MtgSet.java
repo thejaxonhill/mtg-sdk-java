@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thejaxonhill.mtg.shared.MutableBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MtgSet {
 
-    public static class MtgSetBuilder implements MtgBuilder<MtgSetBuilder> {
+    public static class MtgSetBuilder implements MutableBuilder<MtgSetBuilder> {
     }
 
     private String block;

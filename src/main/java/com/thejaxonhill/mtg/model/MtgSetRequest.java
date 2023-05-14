@@ -1,5 +1,7 @@
 package com.thejaxonhill.mtg.model;
 
+import com.thejaxonhill.mtg.shared.MutableBuilder;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MtgSetRequest {
 
-    public static class MtgSetRequestBuilder implements MtgBuilder<MtgSetRequestBuilder> {
+    public static class MtgSetRequestBuilder implements MutableBuilder<MtgSetRequestBuilder> {
     }
 
     private String block;

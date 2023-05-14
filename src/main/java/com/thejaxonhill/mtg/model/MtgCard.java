@@ -3,6 +3,7 @@ package com.thejaxonhill.mtg.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.thejaxonhill.mtg.shared.MutableBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MtgCard {
 
-    public static class MtgCardBuilder implements MtgBuilder<MtgCardBuilder> {
+    public static class MtgCardBuilder implements MutableBuilder<MtgCardBuilder> {
     }
 
     private String artist;

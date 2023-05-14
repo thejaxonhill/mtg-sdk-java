@@ -1,6 +1,7 @@
 package com.thejaxonhill.mtg.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.thejaxonhill.mtg.shared.MutableBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ForeignName {
     
-    public static class ForeignNameBuilder implements MtgBuilder<ForeignNameBuilder> {
+    public static class ForeignNameBuilder implements MutableBuilder<ForeignNameBuilder> {
     }
 
     private String flavor;

@@ -30,8 +30,7 @@ public class MtgCardServiceTest {
 
     @Test
     void testGetAll_withConsumer() {
-        MtgExpression exp = MtgExpression.builder("u").and("w").build();
-        List<MtgCard> res = service.getAll(r -> r.colors(exp.getExpression()));
+        List<MtgCard> res = service.getAll(r -> r.colors(e -> e.with("u").and("w")));
         assertFalse(res.isEmpty());
     }
 

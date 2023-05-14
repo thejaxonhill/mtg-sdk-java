@@ -1,8 +1,8 @@
-package com.thejaxonhill.mtg.model;
+package com.thejaxonhill.mtg.shared;
 
 import java.util.function.Consumer;
 
-public interface MtgBuilder<B extends MtgBuilder<B>> {
+public interface MutableBuilder<B extends MutableBuilder<B>> {
 
     /**
      * As seen implemented first in AWS SDK for Java

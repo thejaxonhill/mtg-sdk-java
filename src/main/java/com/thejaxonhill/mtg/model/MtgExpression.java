@@ -1,18 +1,30 @@
 package com.thejaxonhill.mtg.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.thejaxonhill.mtg.exception.MtgExpressionException;
+import com.thejaxonhill.mtg.shared.MutableBuilder;
 
-@Getter
-@RequiredArgsConstructor
+import lombok.Getter;
+
 public class MtgExpression {
+
+    @Getter
     private final String expression;
 
-    public static class MtgExpressionBuilder {
-        StringBuilder sb;
+    private MtgExpression(String expression) {
+        this.expression = expression;
+    }
 
-        MtgExpressionBuilder(String value) {
-            this.sb = new StringBuilder(value);
+    public static class MtgExpressionBuilder implements MutableBuilder<MtgExpressionBuilder> {
+        StringBuilder sb;
+        String with;
+
+        MtgExpressionBuilder() {
+            this.sb = new StringBuilder();
+        }
+
+        public MtgExpressionBuilder with(String with) {
+            this.with = with;
+            return this;
         }
 
         public MtgExpressionBuilder and(String value) {
@@ -26,12 +38,18 @@ public class MtgExpression {
         }
 
         public MtgExpression build() {
-            return new MtgExpression(sb.toString());
+            if(!isValid())
+                throw new MtgExpressionException();
+            return new MtgExpression(sb.insert(0, with).toString());
+        }
+
+        private boolean isValid() {
+            return this.with != null && !this.with.isEmpty();
         }
     }
 
-    public static MtgExpressionBuilder builder(String value) {
-        return new MtgExpressionBuilder(value);
+    public static MtgExpressionBuilder builder() {
+        return new MtgExpressionBuilder();
     }
 
 }
