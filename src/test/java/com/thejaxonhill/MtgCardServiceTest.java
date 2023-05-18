@@ -9,6 +9,8 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import com.thejaxonhill.mtg.model.MtgCard;
+import com.thejaxonhill.mtg.model.MtgCardRequest;
+import com.thejaxonhill.mtg.model.MtgExpression;
 import com.thejaxonhill.mtg.service.MtgCardService;
 import com.thejaxonhill.mtg.service.MtgCardServiceImpl;
 
@@ -19,8 +21,21 @@ public class MtgCardServiceTest {
             .build();
 
     @Test
-    void testGetAll_withConsumer() {
-        List<MtgCard> res = service.getAll(r -> r.colors(e -> e.with("u").and("w")));
+    void givenColors_whenGetAllWithConusmer_thenOk() {
+        MtgExpression exp = MtgExpression.builder().with("u").and("w").build();
+        MtgExpression exp2 = MtgExpression.builder().with("imageUrl").build();
+        MtgCardRequest request = MtgCardRequest.builder().colors(exp).contains(exp2).build();
+        List<MtgCard> res1 = service.getAll(request);
+
+        List<MtgCard> res = service.getAll(r -> r.colors(e -> e.with("u").and("w"))
+                .contains(e -> e.with("imageUrl")
+                .and("multiversId")));
+        assertFalse(res.isEmpty());
+    }
+
+    @Test
+    void givenArtists_whenGetAllWithConsumer_thenOk() {
+        List<MtgCard> res = service.getAll(r -> r.artist(e -> e.with("Randy Gallegos").or("Josu Hernaiz")));
         assertFalse(res.isEmpty());
     }
 
