@@ -123,21 +123,13 @@ public class MtgCardRequest {
         /**
          * The flavor text of the card.
          * 
-         * @param flavor single flavor text or expression
+         * @param flavor flavor text string
          * @return The updated builder instance
          * 
          */
         public MtgCardRequestBuilder flavor(String flavor) {
             this.flavor = flavor;
             return this;
-        }
-
-        public MtgCardRequestBuilder flavor(MtgExpression expression) {
-            return contains(expression.getExpression());
-        }
-
-        public MtgCardRequestBuilder flavor(Consumer<MtgExpressionBuilder> mutator) {
-            return flavor(MtgExpression.builder().applyMutation(mutator).build());
         }
 
         /**
@@ -410,6 +402,166 @@ public class MtgCardRequest {
             this.random = random;
             return this;
         }
+
+        /**
+         * The set the card belongs to (set 
+         * code).
+         * 
+         * @param set single set or expression
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder set(String set) {
+            this.set = set;
+            return this;
+        }
+
+        public MtgCardRequestBuilder set(MtgExpression expression) {
+            return set(expression.getExpression());
+        }
+
+        public MtgCardRequestBuilder set(Consumer<MtgExpressionBuilder> mutator) {
+            return set(MtgExpression.builder().applyMutation(mutator).build());
+        }
+
+        /**
+         * The set the card belongs to
+         * 
+         * @param setName single setName or expression
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder setName(String setName) {
+            this.setName = setName;
+            return this;
+        }
+
+        public MtgCardRequestBuilder setName(MtgExpression expression) {
+            return setName(expression.getExpression());
+        }
+
+        public MtgCardRequestBuilder setName(Consumer<MtgExpressionBuilder> mutator) {
+            return setName(MtgExpression.builder().applyMutation(mutator).build());
+        }
+
+        /**
+         * The subtypes of the card. These 
+         * appear to the right of the dash in a 
+         * card type. Usually each word is its 
+         * own subtype. Example values: Trap,
+         *  Arcane, Equipment, Aura, Human, 
+         * Rat, Squirrel, etc.
+         * 
+         * @param subtypes single subtype or expression
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder subtypes(String subtypes) {
+            this.subtypes = subtypes;
+            return this;
+        }
+
+        public MtgCardRequestBuilder subtypes(MtgExpression expression) {
+            return subtypes(expression.getExpression());
+        }
+
+        public MtgCardRequestBuilder subtypes(Consumer<MtgExpressionBuilder> mutator) {
+            return subtypes(MtgExpression.builder().applyMutation(mutator).build());
+        }
+
+        /**
+         * The subtypes of the card. These 
+         * appear to the right of the dash in a 
+         * card type. Usually each word is its 
+         * own subtype. Example values: Trap,
+         *  Arcane, Equipment, Aura, Human, 
+         * Rat, Squirrel, etc.
+         * 
+         * @param supertypes single supertypes or expression
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder supertypes(String supertypes) {
+            this.supertypes = supertypes;
+            return this;
+        }
+
+        public MtgCardRequestBuilder supertypes(MtgExpression expression) {
+            return supertypes(expression.getExpression());
+        }
+
+        public MtgCardRequestBuilder supertypes(Consumer<MtgExpressionBuilder> mutator) {
+            return supertypes(MtgExpression.builder().applyMutation(mutator).build());
+        }
+
+        /**
+         * The oracle text of the card. May 
+         * contain mana symbols and other 
+         * symbols.
+         * 
+         * @param text text string
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder text(String text) {
+            this.text = text;
+            return this;
+        }
+
+        /**
+         * The toughness of the card. This is 
+         * only present for creatures. This is a 
+         * string, not an integer, because some 
+         * cards have toughness like: “1+*”
+         * 
+         * @param toughness toughness string
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder toughness(String toughness) {
+            this.toughness = toughness;
+            return this;
+        }
+
+        /**
+         * The card type. This is the type you 
+         * would see on the card if printed 
+         * today. Note: The dash is a UTF8 
+         * ‘long dash’ as per the MTG rules
+         * 
+         * @param type type string
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder type(String type) {
+            this.type = type;
+            return this;
+        }
+
+        /**
+         * The types of the card. These appear 
+         * to the left of the dash in a card type. 
+         * Example values: Instant, Sorcery, 
+         * Artifact, Creature, Enchantment, 
+         * Land, Planeswalker
+         * 
+         * @param types single type or expression
+         * @return The updated builder instance
+         * 
+         */
+        public MtgCardRequestBuilder types(String types) {
+            this.types = types;
+            return this;
+        }
+
+        public MtgCardRequestBuilder types(MtgExpression expression) {
+            return types(expression.getExpression());
+        }
+
+        public MtgCardRequestBuilder types(Consumer<MtgExpressionBuilder> mutator) {
+            return types(MtgExpression.builder().applyMutation(mutator).build());
+        }
+
     }
 
     private String artist;
@@ -458,9 +610,9 @@ public class MtgCardRequest {
 
     private String setName;
 
-    private String superTypes;
+    private String subtypes;
 
-    private String subTypes;
+    private String supertypes;
 
     private String text;
 

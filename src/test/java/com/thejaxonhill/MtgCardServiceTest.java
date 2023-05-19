@@ -2,6 +2,7 @@ package com.thejaxonhill;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgCardRequest;
-import com.thejaxonhill.mtg.model.MtgExpression;
 import com.thejaxonhill.mtg.service.MtgCardService;
 import com.thejaxonhill.mtg.service.MtgCardServiceImpl;
 
@@ -21,16 +21,17 @@ public class MtgCardServiceTest {
             .build();
 
     @Test
-    void givenColors_whenGetAllWithConusmer_thenOk() {
-        MtgExpression exp = MtgExpression.builder().with("u").and("w").build();
-        MtgExpression exp2 = MtgExpression.builder().with("imageUrl").build();
-        MtgCardRequest request = MtgCardRequest.builder().colors(exp).contains(exp2).build();
-        List<MtgCard> res1 = service.getAll(request);
+    void givenColors_whenGetAll_thenAllCardsMatch() {
+        MtgCardRequest request = MtgCardRequest.builder().colors("u").build();
+        List<MtgCard> cardsList = service.getAll(request);
+        cardsList.forEach(card -> assertTrue(card.getColors().stream()
+                .anyMatch(color -> color.equals("U"))));
 
-        List<MtgCard> res = service.getAll(r -> r.colors(e -> e.with("u").and("w"))
-                .contains(e -> e.with("imageUrl")
-                .and("multiversId")));
-        assertFalse(res.isEmpty());
+        List<MtgCard> cardsList2 = service.getAll(r -> r.colors(e -> e.with("u").and("w")));
+        cardsList2.forEach(card -> assertTrue(card.getColors().stream()
+                .anyMatch(color -> color.equals("U")) &&
+                card.getColors().stream()
+                        .anyMatch(color -> color.equals("W"))));
     }
 
     @Test
