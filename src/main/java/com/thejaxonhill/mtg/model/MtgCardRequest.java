@@ -19,8 +19,8 @@ public class MtgCardRequest {
     public static class MtgCardRequestBuilder implements MutableBuilder<MtgCardRequestBuilder> {
 
         /**
-         * The artist of the card. This may not 
-         * match what is on the card as MTGJSON 
+         * The artist of the card. This may not
+         * match what is on the card as MTGJSON
          * corrects many card misprints.
          * 
          * @param colors String of artists
@@ -53,9 +53,9 @@ public class MtgCardRequest {
         }
 
         /**
-         * The card colors. Usually this is derived 
-         * from the casting cost, but some cards are 
-         * special (like the back of dual sided cards 
+         * The card colors. Usually this is derived
+         * from the casting cost, but some cards are
+         * special (like the back of dual sided cards
          * and Ghostfire).
          * 
          * @param colors single color or expression
@@ -133,9 +133,9 @@ public class MtgCardRequest {
         }
 
         /**
-         * The game format, such as Commander, 
-         * Standard, Legacy, etc. (when used, 
-         * legality defaults to Legal unless 
+         * The game format, such as Commander,
+         * Standard, Legacy, etc. (when used,
+         * legality defaults to Legal unless
          * supplied)
          * 
          * @param gameFormat single game format or expression
@@ -156,11 +156,11 @@ public class MtgCardRequest {
         }
 
         /**
-         * A unique id for this card. It is 
-         * made up by doing an SHA1 hash of 
+         * A unique id for this card. It is
+         * made up by doing an SHA1 hash of
          * setCode + cardName + cardImageName
          * 
-         * @param id 
+         * @param id
          * @return The updated builder instance
          * 
          */
@@ -170,9 +170,9 @@ public class MtgCardRequest {
         }
 
         /**
-         * The card layout. Possible values: 
-         * normal, split, flip, double-faced, 
-         * token, plane, scheme, phenomenon, 
+         * The card layout. Possible values:
+         * normal, split, flip, double-faced,
+         * token, plane, scheme, phenomenon,
          * leveler, vanguard, aftermath
          * 
          * @param layout layout enum
@@ -185,8 +185,8 @@ public class MtgCardRequest {
         }
 
         /**
-         * The language the card is printed in. 
-         * Use this parameter along with the name 
+         * The language the card is printed in.
+         * Use this parameter along with the name
          * parameter when searching by foreignName
          * 
          * @param language single language or expression
@@ -207,7 +207,7 @@ public class MtgCardRequest {
         }
 
         /**
-         * The legality of the card for a given format, 
+         * The legality of the card for a given format,
          * such as Legal, Banned or Restricted.
          * 
          * @param legality single legality or expression
@@ -228,7 +228,7 @@ public class MtgCardRequest {
         }
 
         /**
-         * The loyalty of the card. This is only 
+         * The loyalty of the card. This is only
          * present for planeswalkers.
          * 
          * @param loyalty single loyalty or expression
@@ -249,13 +249,13 @@ public class MtgCardRequest {
         }
 
         /**
-         * The multiverseid of the card on 
-         * Wizard’s Gatherer web page. Cards 
-         * from sets that do not exist on 
-         * Gatherer will NOT have a 
-         * multiverseid. Sets not on Gatherer 
-         * are: ATH, ITP, DKM, RQS, DPA and 
-         * all sets with a 4 letter code that 
+         * The multiverseid of the card on
+         * Wizard’s Gatherer web page. Cards
+         * from sets that do not exist on
+         * Gatherer will NOT have a
+         * multiverseid. Sets not on Gatherer
+         * are: ATH, ITP, DKM, RQS, DPA and
+         * all sets with a 4 letter code that
          * starts with a lowercase ‘p’.
          * 
          * @param multiverseid string of id
@@ -269,8 +269,8 @@ public class MtgCardRequest {
 
         /**
          * The card name. For split, double-
-         * faced and flip cards, just the name 
-         * of one side of the card. Basically 
+         * faced and flip cards, just the name
+         * of one side of the card. Basically
          * each ‘sub-card’ has its own record.
          * 
          * @param name single name or expression
@@ -291,10 +291,10 @@ public class MtgCardRequest {
         }
 
         /**
-         * The card number. This is printed at 
-         * the bottom-center of the card in 
-         * small text. This is a string, not an 
-         * integer, because some cards have 
+         * The card number. This is printed at
+         * the bottom-center of the card in
+         * small text. This is a string, not an
+         * integer, because some cards have
          * letters in their numbers.
          * 
          * @param number single number or expression
@@ -314,8 +314,8 @@ public class MtgCardRequest {
             return number(MtgExpression.builder().applyMutation(mutator).build());
         }
 
-         /**
-         * The field to order by in the response 
+        /**
+         * The field to order by in the response
          * results
          * 
          * @param orderBy field to order by
@@ -340,8 +340,8 @@ public class MtgCardRequest {
         }
 
         /**
-         * The amount of data to return in a 
-         * single request. The default (and 
+         * The amount of data to return in a
+         * single request. The default (and
          * max) is 100.
          * 
          * @param pageSize page size
@@ -354,9 +354,9 @@ public class MtgCardRequest {
         }
 
         /**
-         * The power of the card. This is only 
-         * present for creatures. This is a 
-         * string, not an integer, because some 
+         * The power of the card. This is only
+         * present for creatures. This is a
+         * string, not an integer, because some
          * cards have powers like: “1+*”
          * 
          * @param power power of card
@@ -369,8 +369,8 @@ public class MtgCardRequest {
         }
 
         /**
-         * The rarity of the card. Examples: 
-         * Common, Uncommon, Rare, Mythic 
+         * The rarity of the card. Examples:
+         * Common, Uncommon, Rare, Mythic
          * Rare, Special, Basic Land
          * 
          * @param rarity single rarity or expression
@@ -391,7 +391,7 @@ public class MtgCardRequest {
         }
 
         /**
-         * Fetch any number of cards 
+         * Fetch any number of cards
          * (controlled by pageSize) randomly
          * 
          * @param random bool
@@ -404,7 +404,7 @@ public class MtgCardRequest {
         }
 
         /**
-         * The set the card belongs to (set 
+         * The set the card belongs to (set
          * code).
          * 
          * @param set single set or expression
@@ -445,11 +445,11 @@ public class MtgCardRequest {
         }
 
         /**
-         * The subtypes of the card. These 
-         * appear to the right of the dash in a 
-         * card type. Usually each word is its 
+         * The subtypes of the card. These
+         * appear to the right of the dash in a
+         * card type. Usually each word is its
          * own subtype. Example values: Trap,
-         *  Arcane, Equipment, Aura, Human, 
+         * Arcane, Equipment, Aura, Human,
          * Rat, Squirrel, etc.
          * 
          * @param subtypes single subtype or expression
@@ -470,11 +470,11 @@ public class MtgCardRequest {
         }
 
         /**
-         * The subtypes of the card. These 
-         * appear to the right of the dash in a 
-         * card type. Usually each word is its 
+         * The subtypes of the card. These
+         * appear to the right of the dash in a
+         * card type. Usually each word is its
          * own subtype. Example values: Trap,
-         *  Arcane, Equipment, Aura, Human, 
+         * Arcane, Equipment, Aura, Human,
          * Rat, Squirrel, etc.
          * 
          * @param supertypes single supertypes or expression
@@ -495,8 +495,8 @@ public class MtgCardRequest {
         }
 
         /**
-         * The oracle text of the card. May 
-         * contain mana symbols and other 
+         * The oracle text of the card. May
+         * contain mana symbols and other
          * symbols.
          * 
          * @param text text string
@@ -509,9 +509,9 @@ public class MtgCardRequest {
         }
 
         /**
-         * The toughness of the card. This is 
-         * only present for creatures. This is a 
-         * string, not an integer, because some 
+         * The toughness of the card. This is
+         * only present for creatures. This is a
+         * string, not an integer, because some
          * cards have toughness like: “1+*”
          * 
          * @param toughness toughness string
@@ -524,9 +524,9 @@ public class MtgCardRequest {
         }
 
         /**
-         * The card type. This is the type you 
-         * would see on the card if printed 
-         * today. Note: The dash is a UTF8 
+         * The card type. This is the type you
+         * would see on the card if printed
+         * today. Note: The dash is a UTF8
          * ‘long dash’ as per the MTG rules
          * 
          * @param type type string
@@ -539,10 +539,10 @@ public class MtgCardRequest {
         }
 
         /**
-         * The types of the card. These appear 
-         * to the left of the dash in a card type. 
-         * Example values: Instant, Sorcery, 
-         * Artifact, Creature, Enchantment, 
+         * The types of the card. These appear
+         * to the left of the dash in a card type.
+         * Example values: Instant, Sorcery,
+         * Artifact, Creature, Enchantment,
          * Land, Planeswalker
          * 
          * @param types single type or expression

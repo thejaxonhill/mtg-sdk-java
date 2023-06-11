@@ -34,7 +34,7 @@ public class MtgCard {
 
     private String imageUrl;
 
-    private String layout;
+    private Layout layout;
 
     private List<Legality> legalities;
 

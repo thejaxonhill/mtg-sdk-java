@@ -11,23 +11,23 @@ import org.junit.jupiter.api.Test;
 
 import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgCardRequest;
+import com.thejaxonhill.mtg.service.MtgCards;
 import com.thejaxonhill.mtg.service.MtgCardService;
-import com.thejaxonhill.mtg.service.MtgCardServiceImpl;
 
 public class MtgCardServiceTest {
 
-    MtgCardService service = MtgCardServiceImpl.builder()
+    MtgCards service = MtgCardService.builder()
             .useDefault()
             .build();
 
     @Test
     void givenColors_whenGetAll_thenAllCardsMatch() {
         MtgCardRequest request = MtgCardRequest.builder().colors("u").build();
-        List<MtgCard> cardsList = service.getAll(request);
+        List<MtgCard> cardsList = service.all(request);
         cardsList.forEach(card -> assertTrue(card.getColors().stream()
                 .anyMatch(color -> color.equals("U"))));
 
-        List<MtgCard> cardsList2 = service.getAll(r -> r.colors(e -> e.with("u").and("w")));
+        List<MtgCard> cardsList2 = service.all(r -> r.colors(e -> e.with("u").and("w")));
         cardsList2.forEach(card -> assertTrue(card.getColors().stream()
                 .anyMatch(color -> color.equals("U")) &&
                 card.getColors().stream()
@@ -36,7 +36,7 @@ public class MtgCardServiceTest {
 
     @Test
     void givenArtists_whenGetAllWithConsumer_thenOk() {
-        List<MtgCard> res = service.getAll(r -> r.artist(e -> e.with("Randy Gallegos").or("Josu Hernaiz")));
+        List<MtgCard> res = service.all(r -> r.artist(e -> e.with("Randy Gallegos").or("Josu Hernaiz")));
         assertFalse(res.isEmpty());
     }
 
