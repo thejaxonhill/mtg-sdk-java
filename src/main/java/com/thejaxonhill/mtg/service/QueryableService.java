@@ -9,7 +9,7 @@ import com.thejaxonhill.mtg.shared.MutableBuilder;
 import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl;
 import com.thejaxonhill.mtg.shared.SerializableHttpClientImpl.SerializableHttpClientImplBuilder;
 
-public interface MtgService<T, REQ, B extends MutableBuilder<B>> {
+public interface QueryableService<T, R, B extends MutableBuilder<B>> {
 
     /**
      * Method to fetch a specific object with a known id.
@@ -30,7 +30,7 @@ public interface MtgService<T, REQ, B extends MutableBuilder<B>> {
      * @param request object with available request parameters
      * @return List<T> an list of found objects
      */
-    List<T> getAll(REQ request);
+    List<T> getAll(R request);
 
     /**
      * Fetches a list objects based on the given mutator.

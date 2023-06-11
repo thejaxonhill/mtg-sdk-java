@@ -21,9 +21,7 @@ import okhttp3.Response;
 public class SerializableHttpClientImpl implements SerializableHttpClient {
 
     private final String host;
-
     private final OkHttpClient client;
-
     private final ObjectMapper om;
 
     public static class SerializableHttpClientImplBuilder implements MutableBuilder<SerializableHttpClientImplBuilder> {

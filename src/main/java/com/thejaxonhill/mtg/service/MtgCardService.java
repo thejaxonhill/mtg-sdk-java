@@ -7,7 +7,7 @@ import com.thejaxonhill.mtg.model.MtgCard;
 import com.thejaxonhill.mtg.model.MtgCardRequest;
 import com.thejaxonhill.mtg.model.MtgCardRequest.MtgCardRequestBuilder;
 
-public interface MtgCardService extends MtgService<MtgCard, MtgCardRequest, MtgCardRequestBuilder> {
+public interface MtgCardService extends QueryableService<MtgCard, MtgCardRequest, MtgCardRequestBuilder> {
     
     @Override
     default List<MtgCard> getAll(Consumer<MtgCardRequestBuilder> consumer) {
