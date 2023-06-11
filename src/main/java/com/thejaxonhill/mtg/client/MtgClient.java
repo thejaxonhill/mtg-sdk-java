@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thejaxonhill.mtg.exception.MtgClientException;
 
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
