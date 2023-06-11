@@ -1,4 +1,4 @@
-package com.thejaxonhill.mtg.client;
+package com.thejaxonhill.mtg.exception;
 
 public class MtgClientException extends RuntimeException {
     public MtgClientException(String message) {
