@@ -10,9 +10,4 @@ import com.thejaxonhill.mtg.shared.QueryableService;
 
 public interface MtgCards extends QueryableService<MtgCard, MtgCardRequest, MtgCardRequestBuilder> {
 
-    @Override
-    default List<MtgCard> all(Consumer<MtgCardRequestBuilder> consumer) {
-        return all(MtgCardRequest.builder().applyMutation(consumer).build());
-    }
-
 }
