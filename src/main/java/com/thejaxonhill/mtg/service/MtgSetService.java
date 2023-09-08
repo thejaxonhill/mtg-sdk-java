@@ -33,11 +33,6 @@ public class MtgSetService extends MtgClient implements MtgSets {
     }
 
     @Override
-    public List<MtgSet> all(Consumer<MtgSetRequestBuilder> consumer) {
-        return all(MtgSetRequest.builder().applyMutation(consumer).build());
-    }
-
-    @Override
     public List<MtgCard> generateBooster(String code) {
         MtgCardsResponse res = send(u -> u.addPathSegments("sets/" + code + "/booster"), MtgCardsResponse.class);
         return res == null ? new ArrayList<>() : res.cards();

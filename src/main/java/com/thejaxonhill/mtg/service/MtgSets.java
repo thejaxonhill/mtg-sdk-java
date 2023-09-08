@@ -13,14 +13,6 @@ public interface MtgSets extends QueryableService<MtgSet, MtgSetRequest, MtgSetR
 
     List<MtgCard> generateBooster(String code);
 
-    /**
-     * Fetches a list objects based on the given mutator.
-     * Any non-null value in the request will be added to
-     * the query parameters sent to the server.
-     *
-     * @param consumer mutator with available request parameters
-     * @return List<T> an list of found objects
-     */
     @Override
     default List<MtgSet> all(Consumer<MtgSetRequestBuilder> consumer) {
         return all(MtgSetRequest.builder().applyMutation(consumer).build());
